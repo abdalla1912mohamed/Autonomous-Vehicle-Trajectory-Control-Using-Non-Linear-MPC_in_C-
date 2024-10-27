@@ -1,0 +1,62 @@
+# Importing necessary libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Upload the CSV file
+from google.colab import files
+
+
+# Load the CSV file into a DataFrame
+df = pd.read_csv('MPC_CHANGING_LANES_constant_VELOCITY.csv', header=None)
+
+# Set up plotting
+fig, axs = plt.subplots(4, 2, figsize=(15, 15))
+
+# Reference Trajectory
+####axs[0, 0].set_ylabel(' ref y coordinate  (Y-axis)')
+
+# Real Trajectory
+axs[0, 0].plot(df.iloc[2, :], df.iloc[3, :])
+axs[0, 0].set_title('Real Trajectory')
+axs[0, 0].set_xlabel(' real x coordinate (X-axis)')
+axs[0, 0].set_ylabel('real y coordinate  (Y-axis)')
+axs[0, 0].set_ylim([-10, 10])
+axs[0, 0].set_xlim([0, 2000])
+# Psi vs Row 9
+######axs[1, 0].legend()
+
+# Velocity vs Row 9
+axs[0, 1].plot(df.iloc[9, :], df.iloc[6, :], label=' ref vel ')
+axs[0, 1].plot(df.iloc[9, :], df.iloc[7, :], label='real vel')
+axs[0, 1].set_title('Velocity vs Row 9')
+axs[0, 1].set_xlabel('Row 9 (X-axis)')
+axs[0, 1].set_ylabel('Values')
+axs[0, 1].legend()
+axs[0, 1].set_ylim([0, 80])
+axs[0, 1].set_xlim([0, 100])
+# Cost vs Row 9
+axs[1, 0].plot(df.iloc[9, :], df.iloc[8, :])
+axs[1, 0].set_title('Cost vs time ')
+axs[1, 0].set_xlabel('time')
+axs[1, 0].set_ylabel('cost function ')
+axs[1, 0].set_ylim([0, 100000])
+
+# Cost vs Row 9
+axs[1, 1].plot(df.iloc[9, :], df.iloc[10, :])
+axs[1, 1].set_title('acceleration input vs time ')
+axs[1, 1].set_xlabel('time')
+axs[1, 1].set_ylabel('acc m/s^2 ')
+axs[1, 1].set_ylim([-8, 8])
+# steering angle input
+axs[2, 0].plot(df.iloc[9, :], df.iloc[11, :])
+axs[2, 0].set_title('steering input vs time ')
+axs[2, 0].set_xlabel('time')
+axs[2, 0].set_ylabel('steering angle ')
+axs[2, 0].set_ylim([-0.0000005, 0.000005])
+# Hide the empty subplot
+#axs[2, 1].axis('off')
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+

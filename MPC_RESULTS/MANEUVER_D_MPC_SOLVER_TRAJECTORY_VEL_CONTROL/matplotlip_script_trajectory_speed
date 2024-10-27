@@ -1,0 +1,80 @@
+# Importing necessary libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Upload the CSV file
+from google.colab import files
+
+
+# Load the CSV file into a DataFrame
+df = pd.read_csv('matrix.csv', header=None) // dont forget to upload the generated csv file
+
+# Set up plotting
+fig, axs = plt.subplots(4, 2, figsize=(15, 15))
+
+# Plot the reference trajectory
+# Plot the reference trajectory
+# Use axs[0, 0] to access the top-left subplot
+axs[0, 0].plot(df.iloc[9, :], df.iloc[0, :], label='ref X', color='red')
+axs[0, 0].plot(df.iloc[9, :], df.iloc[2, :], label='Real X', color='blue')
+axs[0, 0].set_title('real vs ref X coordinate ')
+axs[0, 0].set_xlabel('Time  (X-axis)')
+axs[0, 0].set_ylabel( ('Y-axis)'))
+axs[0, 0].legend()
+axs[0, 0].grid(True)
+
+# Plot the real trajectory with different scaling or limits if needed
+# Use axs[0, 1] to access the top-right subplot
+axs[0, 1].plot(df.iloc[9, :], df.iloc[1, :], label='Ref y', color='red')
+axs[0, 1].plot(df.iloc[9, :], df.iloc[3, :], label='Real y', color='blue')
+axs[0, 1].set_title('Real vs Reference Y coordinate')
+axs[0, 1].set_xlabel('Time (X-axis)')
+axs[0, 1].set_ylabel(' (Y-axis)')
+axs[0, 1].set_ylim([-200, 200])
+axs[0, 1].legend()
+
+axs[0, 1].set_ylim([-50, 50])
+#axs[0, 1].grid(True)
+
+# Psi vs Row 9
+#axs[1, 0].plot(df.iloc[9, :], df.iloc[4, :], label='ref psi ')
+axs[1, 0].plot(df.iloc[9, :], df.iloc[5, :], label='real psi')
+axs[1, 0].set_title('   real psi')
+axs[1, 0].set_xlabel('iterations X-axis)')
+axs[1, 0].set_ylabel('Values')
+axs[1, 0].legend()
+axs[1, 0].set_ylim([-5, 5])
+# Velocity vs Row 9
+axs[1, 1].plot(df.iloc[9, :], df.iloc[6, :], label=' ref vel ')
+axs[1, 1].plot(df.iloc[9, :], df.iloc[7, :], label='real vel')
+axs[1, 1].set_title('Velocity vs Row 9')
+axs[1, 1].set_xlabel('Row 9 (X-axis)')
+axs[1, 1].set_ylabel('Values')
+axs[1, 1].legend()
+axs[1, 1].set_ylim([0, 50])
+# Cost vs Row 9
+axs[2, 0].plot(df.iloc[9, :], df.iloc[8, :])
+axs[2, 0].set_title('Cost vs time ')
+axs[2, 0].set_xlabel('time')
+axs[2, 0].set_ylabel('cost function ')
+axs[2, 0].set_ylim([0, 30000])
+
+# Cost vs Row 9
+axs[2, 1].plot(df.iloc[9, :], df.iloc[10, :])
+axs[2, 1].set_title('acceleration input vs time ')
+axs[2, 1].set_xlabel('time')
+axs[2, 1].set_ylabel('acc m/s^2 ')
+axs[2, 1].set_ylim([-8, 8])
+# steering angle input 
+axs[3, 0].plot(df.iloc[9, :], df.iloc[11, :])
+axs[3, 0].set_title('steering input vs time ')
+axs[3, 0].set_xlabel('time')
+axs[3, 0].set_ylabel('steering angle ')
+axs[3, 0].set_ylim([-0.3, 0.3])
+# Hide the empty subplot
+#axs[2, 1].axis('off')
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+
